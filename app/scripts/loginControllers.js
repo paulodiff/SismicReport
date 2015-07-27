@@ -103,16 +103,14 @@ angular.module('myApp.controllers')
             $scope.currentUser = Session.nome_breve_utenti;
             
              var alertPopup = $ionicPopup.alert({
-                title: 'Utente non autenticato',
+                title: 'Utente non autenticato o sessione di lavoro scaduta',
                 template: 'Immettere nome utente e password'
                 });
             alertPopup.then(function(res) {
              $log.debug('AppCtrl: alertPopup : OK');
                 $state.go('menu.home');
            });
-           
-           
-            
+
         }); 
     
         $rootScope.$on('$stateChangeStart', function (event, next) {
