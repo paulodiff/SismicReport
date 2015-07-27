@@ -8,8 +8,8 @@ angular.module('myApp.controllers')
 
 
 .controller("AppCtrl", 
-                    ['$scope', '$rootScope', 'AuthService', 'Session', 'Restangular',  '$state', '$ionicPopup','$ionicSideMenuDelegate', 'ENV', '$log',
-            function($scope,   $rootScope,   AuthService,   Session,   Restangular,    $state,   $ionicPopup,  $ionicSideMenuDelegate,   ENV, $log) {
+                    ['$scope', '$rootScope', 'AuthService', 'Session', 'Restangular', '$state', '$ionicPopup','$ionicSideMenuDelegate', 'ENV', '$log',
+            function($scope,   $rootScope,   AuthService,   Session,   Restangular,  $state,   $ionicPopup,  $ionicSideMenuDelegate,   ENV, $log) {
 
                 
         $log.debug("AppCtrl ... start");
@@ -60,18 +60,20 @@ angular.module('myApp.controllers')
             $log.debug(event);
             $log.debug(next);
             $scope.currentUser = Session.nome_breve_utenti;
-            //Restangular.setDefaultRequestParams({ apiKey: Session.token });
+            Restangular.setDefaultHeaders({'rr-access-token': Session.token});
             //$state.go('menu.list');
             $state.go(ENV.routeAfterLogon);
         });
                 
                 
         $rootScope.$on(ENV.AUTH_EVENTS.logoutSuccess , function (event, next) {
-            $log.debug('AppCtrl: AUTH_EVENTS.logourSuccess ... ');
+            $log.debug('AppCtrl: AUTH_EVENTS.logoutSuccess ... ');
             $log.debug(event);
             $log.debug(next);
+            $log.debug('AppCtrl: destroy session & token ... ');
             $scope.currentUser = '';
-            Restangular.setDefaultRequestParams({ apiKey: '' });
+            Session.token = '123';
+            Restangular.setDefaultHeaders({token: ''});
             $state.go('menu.home');
         });        
                 

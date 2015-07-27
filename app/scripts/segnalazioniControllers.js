@@ -448,8 +448,8 @@ angular.module('myApp.controllers')
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 .controller('ListSegnalazioniController', 
-    ['$scope', '$state', '$location', 'Restangular', '$filter', 'Session', '$ionicModal','$ionicSideMenuDelegate','$ionicPopover', '$ionicPopup', '$ionicLoading', '$log', '$timeout','ENV',
-     function($scope,  $state, $location, Restangular, $filter, Session, $ionicModal,   $ionicSideMenuDelegate,    $ionicPopover,  $ionicPopup,    $ionicLoading,   $log,   $timeout, ENV) {
+    ['$rootScope','$scope', '$state', '$location', 'Restangular', '$filter', 'Session', '$ionicModal','$ionicSideMenuDelegate','$ionicPopover', '$ionicPopup', '$ionicLoading', '$log', '$timeout','ENV',
+     function($rootScope, $scope,  $state, $location, Restangular, $filter, Session, $ionicModal,   $ionicSideMenuDelegate,    $ionicPopover,  $ionicPopup,    $ionicLoading,   $log,   $timeout, ENV) {
     
   $log.debug('ListSegnalazioniController>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');                                 
   $log.debug('ListSegnalazioniController start...');
@@ -619,8 +619,15 @@ angular.module('myApp.controllers')
                 $ionicLoading.hide();  
               
           // in caso di errore azzera la lista...      
-          }, function () {
+          }, function (error) {
                 $scope.items = [];
+                $log.debug(error);
+                $ionicLoading.hide();
+
+                if (error.status == 403) {
+                    //event.preventDefault();    
+                    $rootScope.$broadcast(ENV.AUTH_EVENTS.notAuthenticated);
+                }
       });
           
       /*
