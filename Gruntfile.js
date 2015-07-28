@@ -45,7 +45,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            apiEndpoint: 'http://localhost/api',
+            apiEndpoint: 'https://pmlab.comune.rimini.it/api',
             apiLogin: '/authenticate',
             apiLogout: '/logout',
             routeAfterLogon: 'menu.listSegnalazioni',
