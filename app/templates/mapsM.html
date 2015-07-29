@@ -6,6 +6,7 @@
     </ion-nav-buttons>
       <ion-nav-buttons side="right" >
         <button class="button button-icon ion-ios-refresh" ng-click="refreshMap()"></button>
+        <button class="button button-icon ion-ios-book" ng-click="refreshMap()"></button>
       </ion-nav-buttons>
   </ion-nav-bar>
 
@@ -28,11 +29,24 @@
                          doRebuildAll="true">
         </ui-gmap-markers>
       
+
+        <ui-gmap-polyline ng-repeat="p in polylines" 
+                          path="p.path" 
+                          stroke="p.stroke" 
+                          visible='p.visible'
+                          geodesic='p.geodesic' 
+                          fit="false" 
+                          editable="p.editable" 
+                          draggable="p.draggable" icons='p.icons'></ui-gmap-polyline>
+
+
       </ui-gmap-google-map>
 </ion-content>
-<!--
+
 <ion-footer-bar class="bar-dark">
       <a ng-click="refreshMap()" class="button button-icon icon ion-navigate">Aggiorna dati</a>
+      <a ng-click="refreshMap()" class="button button-icon icon ion-navigate">Solo Pattuglie</a>
+      <a ng-click="refreshMap()" class="button button-icon icon ion-navigate">Percorso</a>
 </ion-footer-bar>
--->
+
 </ion-view>

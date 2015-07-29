@@ -8,8 +8,8 @@
 angular.module('myApp.controllers')
 
 .controller('MapsController', 
-             ['$scope', '$state', '$compile','$location', 'Restangular', 'uiGmapGoogleMapApi', '$filter', 'Session', '$ionicModal','$ionicSideMenuDelegate','$ionicPopover', '$ionicPopup', '$ionicLoading', '$log', '$timeout',
-     function( $scope,   $state,   $compile,  $location,    Restangular,  uiGmapGoogleMapApi ,  $filter,   Session,   $ionicModal,  $ionicSideMenuDelegate,    $ionicPopover,  $ionicPopup,    $ionicLoading, $log,   $timeout) {
+             ['$scope', '$state', '$compile','$location', 'Restangular', 'uiGmapGoogleMapApi', '$filter', 'Session', '$ionicModal','$ionicSideMenuDelegate','$ionicPopover', '$ionicPopup', '$ionicLoading', '$log', '$timeout', 'ENV',
+     function( $scope,   $state,   $compile,  $location,    Restangular,  uiGmapGoogleMapApi ,  $filter,   Session,   $ionicModal,  $ionicSideMenuDelegate,    $ionicPopover,  $ionicPopup,    $ionicLoading, $log,   $timeout, ENV) {
  
 
 
@@ -130,8 +130,12 @@ $scope.randomMarkers = [
 
       // build filter criterra
 
-      var fakeToday = new Date();
-      fakeToday.setDate(fakeToday.getDate() - 3);
+
+      if (ENV.mapsdemo) {
+        var fakeToday = new Date(2015,7,14,11,11,11,0);
+      } else {
+        var fakeToday = new Date();
+      }
 
       var yesterday = new Date();
       yesterday.setDate(fakeToday.getDate());      
@@ -168,7 +172,14 @@ $scope.randomMarkers = [
       $log.debug('MapsController...fetchResult - GET Count');
     
 
-
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
       var serviziList = Restangular.all('getPosizioni');
       
@@ -177,9 +188,11 @@ $scope.randomMarkers = [
       //$scope.filterCriteria.count = 0; // imposta la selezione standard sul server
       $ionicLoading.show({template: 'Dati in arrivo!' });
       return serviziList.getList($scope.filterCriteria).then(function(data) {
-               //$log.debug(data);
+               
+                $log.debug(data);
           
-                var fast_array = [];
+                var fast_array = []; // contiene le ultime posizioni
+                var fast_path = []; // contiene i percorsi
                 var iteratorId = 1;
           
                 //loop per modificare e preparare i dati in arrivo
@@ -218,6 +231,49 @@ $scope.randomMarkers = [
                               */
                           }
                       );
+
+
+                      var curr_path = [];
+                      for (var i = 0; i < idata.Percorso[0].rows.length; i++){
+
+                        curr_path.push(
+                            {
+                              latitude: idata.Percorso[0].rows[i].LatitD,
+                              longitude: idata.Percorso[0].rows[i].LongiD
+                            }
+                          );
+                      }
+
+
+                      
+
+                      fast_path.push(
+                        {
+                          id: iteratorId,
+                          path: curr_path,
+                          stroke: {
+                              color: getRandomColor(),
+                              weight: 3
+                          },
+                          editable: false,
+                          draggable: false,
+                          geodesic: true,
+                          visible: true,
+                          icons: [{
+                              icon: {
+                                  path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW
+                              },
+                          offset: '25px',
+                          repeat: '50px'
+                          }]
+                        }
+
+                      );
+
+
+
+
+
                     
                     }
 
@@ -226,7 +282,8 @@ $scope.randomMarkers = [
                 });
                 
                 $log.debug(fast_array);
-          
+                $log.debug(fast_path);
+          /*
                 //$scope.items = data;
                 $scope.randomMarkers = [];
                 $scope.randomMarkers = fast_array;
@@ -290,7 +347,11 @@ $scope.randomMarkers = [
 
 
             $log.debug($scope.randomMarkers);
-$scope.randomMarkers = fast_array;
+
+*/
+
+            $scope.randomMarkers = fast_array;
+            $scope.polylines = fast_path;
             $log.debug($scope.randomMarkers);
           
                 $log.debug(' .. data loaded!');

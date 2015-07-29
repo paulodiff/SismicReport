@@ -45,10 +45,11 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            apiEndpoint: 'https://pmlab.comune.rimini.it/api',
+            apiEndpoint: 'http://localhost:3000/api',
             apiLogin: '/authenticate',
             apiLogout: '/logout',
             routeAfterLogon: 'menu.listSegnalazioni',
+            mapsdemo : 'true',
             loginUserName:'',
             loginUserPassword:'',
             AUTH_EVENTS:{loginSuccess:'auth-login-success',loginFailed:'auth-login-failed',logoutSuccess:'auth-logout-success',sessionTimeout:'auth-session-timeout',notAuthenticated:'auth-not-authenticated',notAuthorized:'auth-not-authorized'},
@@ -64,6 +65,7 @@ module.exports = function (grunt) {
             apiLogin: '/authenticate',
             apiLogout: '/logout',
             routeAfterLogon: 'menu.listSegnalazioni',
+            mapsdemo : 'true',
             loginUserName:'',
             loginUserPassword:'',
             AUTH_EVENTS:{loginSuccess:'auth-login-success',loginFailed:'auth-login-failed',logoutSuccess:'auth-logout-success',sessionTimeout:'auth-session-timeout',notAuthenticated:'auth-not-authenticated',notAuthorized:'auth-not-authorized'},
