@@ -12,14 +12,36 @@ angular.module('myApp.controllers')
      function( $scope,   $state,   $compile,  $location,    Restangular,  uiGmapGoogleMapApi ,  $filter,   Session,   $ionicModal,  $ionicSideMenuDelegate,    $ionicPopover,  $ionicPopup,    $ionicLoading, $log,   $timeout, ENV) {
  
 
+      // gestione modal popup i filtri --------------------------------------------------
+      $ionicModal.fromTemplateUrl('templates/mapsOptionsModal.html', function(sortModal) {
+            $scope.sortModal = sortModal;
+          },{
+            scope: $scope,
+            animation: 'slide-in-up'
+      });
+
+      $scope.openSortModal = function() {
+        $log.debug('MapsController: Sort Modal ...');    
+        $scope.sortModal.show();
+      };     
+
+      $scope.closeSortModal = function() {
+        $log.debug('MapsController: Close Modal ...');    
+        $scope.sortModal.hide();
+      };
+
+      $scope.mapsOptionsApply = function() {
+        $log.debug('MapsController: Apply ...');
+        $log.debug($scope.filterCriteria); 
+        $scope.sortModal.hide();
+        $scope.refreshMap();
+      };
 
       $scope.staticMarker = [];
       $scope.randomMarkers = [];
 
-
       uiGmapGoogleMapApi.then(function(maps) {
         $log.log('uiGmapGoogleMapApi then . ...');
-
 
         $scope.map = { center: { latitude: 44.0357100000, longitude: 12.5573200000 }, zoom: 12 };
         $scope.refreshMap();
@@ -101,10 +123,14 @@ $scope.randomMarkers = [
         alert('Example of infowindow with ng-click')
       };
 
+
   $scope.filterCriteria = {
     //pageNumber: 1,
     //count: 0,
     //limit: $scope.pageSize,
+    numPosTracking: 10,
+    soloPattuglie: true,
+    timeInterval: 10, // minuti di validità
     qDateUp: $filter('date')( new Date(2015, 6, 20), "yyyyMMdd"),
     qDateDw: $filter('date')( new Date(2015, 6, 20), "yyyyMMdd"),
     table : 'coord_201507'
@@ -137,9 +163,12 @@ $scope.randomMarkers = [
         var fakeToday = new Date();
       }
 
+      $log.debug('Map for : '+ fakeToday);
+
+
       var yesterday = new Date();
       yesterday.setDate(fakeToday.getDate());      
-      yesterday.setMinutes(fakeToday.getMinutes() - 30);
+      yesterday.setMinutes(fakeToday.getMinutes() - $scope.filterCriteria.timeInterval);
 
       $scope.filterCriteria.qDateUp = $filter('date')( fakeToday, "yyyyMMdd@HHmmss");
       $scope.filterCriteria.qDateDw = $filter('date')( yesterday, "yyyyMMdd@HHmmss");
