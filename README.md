@@ -35,4 +35,7 @@ chima AuthService.logout analogo
 AppCtrl controllore che sta in attesa degli eventi .on
 
 
+# Chart test  con
+# Al momento poi Google Chart...
 
+http://jtblin.github.io/angular-chart.js/

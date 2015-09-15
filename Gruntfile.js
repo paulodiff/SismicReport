@@ -46,13 +46,13 @@ module.exports = function (grunt) {
           ENV: {
             name: 'development',
             apiEndpoint: 'http://localhost:3000/api',
-            apiLogin: '/authenticate',
+            apiLogin: '/authenticateMONGO',
             apiLogout: '/logout',
             routeAfterLogon: 'menu.listSegnalazioni',
             mapsdemo : false,
             loginUserName:'',
             loginUserPassword:'',
-            AUTH_EVENTS:{loginSuccess:'auth-login-success',loginFailed:'auth-login-failed',logoutSuccess:'auth-logout-success',sessionTimeout:'auth-session-timeout',notAuthenticated:'auth-not-authenticated',notAuthorized:'auth-not-authorized'},
+            AUTH_EVENTS:{loginSuccess:'auth-login-success',loginFailed:'auth-login-failed',logoutSuccess:'auth-logout-success',sessionTimeout:'auth-session-timeout',notAuthenticated:'auth-not-authenticated',notAuthorized:'auth-not-authorized',serverError:'server-error'},
             USER_ROLES:{all:'*',admin:'admin',editor:'editor',guest:'guest'}
          }
         }
@@ -62,13 +62,13 @@ module.exports = function (grunt) {
           ENV: {
             name: 'production',
             apiEndpoint: 'http://localhost:3000/api',
-            apiLogin: '/authenticate',
+            apiLogin: '/authenticateMONGO',
             apiLogout: '/logout',
             routeAfterLogon: 'menu.listSegnalazioni',
             mapsdemo : false,
             loginUserName:'',
             loginUserPassword:'',
-            AUTH_EVENTS:{loginSuccess:'auth-login-success',loginFailed:'auth-login-failed',logoutSuccess:'auth-logout-success',sessionTimeout:'auth-session-timeout',notAuthenticated:'auth-not-authenticated',notAuthorized:'auth-not-authorized'},
+            AUTH_EVENTS:{loginSuccess:'auth-login-success',loginFailed:'auth-login-failed',logoutSuccess:'auth-logout-success',sessionTimeout:'auth-session-timeout',notAuthenticated:'auth-not-authenticated',notAuthorized:'auth-not-authorized',serverError:'server-error'},
             USER_ROLES:{all:'*',admin:'admin',editor:'editor',guest:'guest'}
           }
         }

@@ -133,7 +133,8 @@ $scope.randomMarkers = [
     timeInterval: 10, // minuti di validità
     qDateUp: $filter('date')( new Date(2015, 6, 20), "yyyyMMdd"),
     qDateDw: $filter('date')( new Date(2015, 6, 20), "yyyyMMdd"),
-    table : 'coord_201507'
+    table : 'coord_' + $filter('date')(new Date(), "yyyyMM"),
+
     //start: 0,
     //sortDir: 'asc',
     //sortedBy: 'id',
@@ -238,12 +239,27 @@ function getRandomColor() {
                     
                     if (iteratorId < 1000) {
                    
+                      var text2display = '';
+                      var iconPath = '';
+                      // Se esiste un intervento in corso per la seguente pattuglia
+                      if (idata.Intervento.length){
+                          text2display = idata.Intervento[0].tipo_segnalazione + "<br>" + idata.Intervento[0].descrizione_breve + "<br>" + idata.Intervento[0].evento_indirizzo1;
+                          iconPath = 'images/red-dot.png';
+                      } else {
+                        text2display = '';
+                        iconPath = 'images/blue-dot.png';
+                      }
+
+
+
                       fast_array.push(
                           {
                               "id": iteratorId,
                               "latitude": idata.LatitD,
                               "longitude": idata.LongiD,
+                              "text2display": text2display,
                               "options": {
+                                "icon" : iconPath,
                                 "labelContent": idata.CodiceRadio,
                                 "labelAnchor": "22 0",
                                 "labelClass": "marker-labels",

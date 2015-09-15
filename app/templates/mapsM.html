@@ -27,6 +27,13 @@
                          options="'options'"
                          click="onMarkerClicked"
                          doRebuildAll="true">
+
+          <ui-gmap-windows show="'showWindow'" closeClick="'closeClick'" ng-cloak>
+                <div>
+                    <p ng-non-bindable>{{text2display}}</p>
+                </div>
+            </ui-gmap-windows>
+
         </ui-gmap-markers>
       
 
@@ -37,7 +44,8 @@
                           geodesic='p.geodesic' 
                           fit="false" 
                           editable="p.editable" 
-                          draggable="p.draggable" icons='p.icons'></ui-gmap-polyline>
+                          draggable="p.draggable" icons='p.icons'>
+        </ui-gmap-polyline>
 
 
       </ui-gmap-google-map>

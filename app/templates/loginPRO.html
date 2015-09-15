@@ -21,7 +21,7 @@
        <label class="item item-text-wrap item-thumbnail-left">
         <img src="images/logo_rimini.png">
         <h2>Sismic Report</h2>
-        <h2>** Versione di prova **</h2>
+        <h2><b>UTENTE E PASSWORD RICHIESTI!</b></h2>
        </label>
 
   <div ng-if="!currentUser">
@@ -29,11 +29,11 @@
 
         <label class="item item-input item-stacked-label">
            <span class="input-label">Utente:</span>
-           <input type="text" ng-model="credentials.username" placeholder="username">
+           <input type="text" ng-model="credentials.username" placeholder="username" capitalize>
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">Password:</span>
-          <input type="password" ng-model="credentials.password" placeholder="password">
+          <input type="password" ng-model="credentials.password" placeholder="password" capitalize>
         </label>
 
           

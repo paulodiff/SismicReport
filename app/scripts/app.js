@@ -61,6 +61,7 @@ angular.module('myApp', ['ionic',
                     controller: "LoginController"
                 }
             },
+            accessLogged: false,
             accessLevel: 'free1' 
     });
     
@@ -178,9 +179,34 @@ angular.module('myApp', ['ionic',
                     controller: "ListSegnalazioniController"
                 }
             },
-        accessLogged: false, 
+        accessLogged: true, 
         configAction: 'view'
     });   
+
+    $stateProvider.state('menu.listBrogliaccio',{
+        url: '/listBrogliaccio',
+         views: {
+                'menuContent' :{
+                    templateUrl: "templates/ListBrogliaccioM.html",
+                    controller: "ListBrogliaccioController"
+                }
+            },
+        accessLogged: true, 
+        configAction: 'view'
+    });   
+
+
+    $stateProvider.state('menu.listReport',{
+        url: '/listReport',
+         views: {
+                'menuContent' :{
+                    templateUrl: "templates/ListReportM.html",
+                    controller: "ListReportController"
+                }
+            },
+        accessLogged: false, 
+        configAction: 'view'
+    });  
 
 /*    
     // rapporti
@@ -272,9 +298,23 @@ angular.module('myApp', ['ionic',
                     controller: "MapsController"
                 }
             },
-        accessLogged: false, 
+        accessLogged: true, 
         configAction: 'view'
   });
+
+ $stateProvider.state('menu.heat',{
+        url: '/heat',
+         views: {
+                'menuContent' :{
+                    templateUrl: "templates/heatM.html",
+                    controller: "HeatController"
+                }
+            },
+        accessLogged: true, 
+        configAction: 'view'
+  });
+
+
 /*
  $stateProvider.state('menu.cordova',{
         url: '/cordova',

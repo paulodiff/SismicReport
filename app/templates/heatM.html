@@ -1,0 +1,37 @@
+<ion-view>
+  <ion-nav-bar class="bar-royal">
+	<ion-nav-title class="bar-dark">Heat</ion-nav-title>
+    <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+    </ion-nav-buttons>
+      <ion-nav-buttons side="right" >
+        <button class="button button-icon ion-ios-refresh" ng-click="refreshMap()"></button>
+        <button class="button button-icon ion-ios-book" ng-click="openSortModal()"></button>
+      </ion-nav-buttons>
+  </ion-nav-bar>
+
+
+
+<ion-content>    
+
+<div id="map_canvas" >
+<ui-gmap-google-map center='map.center' 
+                    zoom='map.zoom' 
+                    draggable="true" 
+                    options="'options'"
+                    events='map.events'
+                    control="map.control"
+                    >
+
+<ui-gmap-layer namespace="visualization" 
+               type="HeatmapLayer" 
+               show="map.showHeat" 
+               onCreated="getHeatData"></ui-gmap-layer>
+
+
+</ui-gmap-google-map>
+</div>
+
+</ion-content>
+
+</ion-view>

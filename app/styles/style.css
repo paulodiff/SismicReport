@@ -50,6 +50,15 @@
     white-space: nowrap;
 }
 
+/* report style */
+
+.report-title-row {
+
+    background-color: #A9F5D0;
+
+}
+
+
 /* ionic fancy select :: http://codepen.io/mhartington/pen/CImqy */
 
 .fancy-select .list {  margin: -1px 0; }
