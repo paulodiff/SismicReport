@@ -63,6 +63,21 @@ angular.module('myApp.controllers')
                     return false; // error handled
             }
 
+            if(response.status === 502) {
+                    $ionicLoading.hide();
+                    $log.debug('setErrorInterceptor 502');
+                    $rootScope.$broadcast(ENV.AUTH_EVENTS.serverError);
+                    return false; // error handled
+            }
+
+            if(response.status === 504) {
+                    $ionicLoading.hide();
+                    $log.debug('setErrorInterceptor 504');
+                    $rootScope.$broadcast(ENV.AUTH_EVENTS.serverError);
+                    return false; // error handled
+            }
+
+
             if(response.status === 404) {
                     $ionicLoading.hide();
                     $log.debug('setErrorInterceptor 404');
@@ -149,7 +164,7 @@ angular.module('myApp.controllers')
     
 
         $rootScope.$on(ENV.AUTH_EVENTS.sessionTimeout, function (event, next) {
-            $log.debug('AUTH_EVENTS.notAuthenticated ... ');
+            $log.debug('AUTH_EVENTS.sessionTimeout ... ');
             $log.debug(event);
             $log.debug(next);
             $scope.currentUser = Session.nome_breve_utenti;
@@ -159,14 +174,14 @@ angular.module('myApp.controllers')
                 template: 'Immettere nome utente e password'
                 });
             alertPopup.then(function(res) {
-             $log.debug('AppCtrl: alertPopup : OK');
+                $log.debug('AppCtrl: alertPopup : OK');
                 $state.go('menu.home');
            });
 
         }); 
 
         $rootScope.$on(ENV.AUTH_EVENTS.serverError, function (event, next) {
-            $log.debug('AUTH_EVENTS.notAuthenticated ... ');
+            $log.debug('AUTH_EVENTS.serverError ... ');
             $log.debug(event);
             $log.debug(next);
             $scope.currentUser = Session.nome_breve_utenti;

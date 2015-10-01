@@ -560,7 +560,6 @@ angular.module('myApp.controllers')
   $log.debug('ListBrogliaccioController SERVIZI INIT filterCriteria');
   $log.debug($scope.filterCriteria);
     
-
  
   //The function that is responsible of fetching the result from the server and setting the grid to the new result
   $scope.fetchResult = function () {

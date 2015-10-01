@@ -178,6 +178,9 @@ angular.module('myApp.controllers')
 
       var offset_page =  ( $scope.currentPage - 1 ) * $scope.pageSize;
       //$scope.filterCriteria.start = offset_page;
+
+      $log.debug('ListReportController: reset GroupHeader for print');
+      $scope.currentGroupHeader = '';
      
       $scope.filterCriteria.idReport = $scope.frmData.idReport;
       $scope.filterCriteria.qDateUp = $filter('date')($scope.frmData.dateUpFilter, "yyyyMMdd"),
@@ -387,7 +390,21 @@ angular.module('myApp.controllers')
         */
     };             
 
+    // Per la stampa del raggruppamento
 
+  $scope.currentGroupHeader = '';
+  $scope.CreateGroupHeader = function (value) {
+          var showHeader = false;
+          //console.log('value:' + value);
+          //console.log('cgh:' + $scope.currentGroupHeader);
+          if($scope.currentGroupHeader != value){
+            showHeader = true;
+          } 
+          //console.log('sgh:' + showHeader);
+          $scope.currentGroupHeader = value;
+          return showHeader;
+    };
+ 
 
 
                           

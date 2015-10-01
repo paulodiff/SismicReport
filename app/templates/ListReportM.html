@@ -67,19 +67,30 @@
 <ion-list class="card item-text-wrap">
      
      <div  ng-show="items.length">
-
-      <div class="row">
-          <div class="col col-20"><b>N.</b></div>
-          <div class="col col-20"><b>%.</b></div>
-          <div class="col col-60"><b>Tipo</b></div>
-      </div>
-  
-      <div class="row" ng-repeat="item in items">
-          <div class="col col-20 report-item-row">{{item.conteggio}}</div>
-          <div class="col col-20 report-item-row">{{item.percentuale | number : 2}}</div>
-          <div class="col col-60 report-item-row">{{item.tipo_segnalazione}}</div>
-      </div>
-     </div>
+            <div ng-repeat="item in items">
+              <div ng-if="CreateGroupHeader(item.ANNOMESE)">
+                <div class="item" style="background-color:yellow">
+                  <div class="row">
+                    <div class="col"><b>{{item.ANNO}}-{{item.MESE}}</b></div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="row">
+                    <div class="col col-20"><b>N.</b></div>
+                    <div class="col col-20"><b>%.</b></div>
+                    <div class="col col-60"><b>Tipo</b></div>
+                  </div>
+                </div>
+              </div>
+              <div class="item item-body">
+                <div class="row">
+                  <div class="col col-20 report-item-row">{{item.conteggio}}</div>
+                  <div class="col col-20 report-item-row">{{item.percentuale | number : 2}}</div>
+                  <div class="col col-60 report-item-row">{{item.tipo_segnalazione}}</div>
+                </div>
+              </div>
+            </div>
+   </div>
 
       <ion-item ng-hide="items.length" class="item-text-wrap">
           <h2>Non ci sono elementi da visualizzare</h2>
