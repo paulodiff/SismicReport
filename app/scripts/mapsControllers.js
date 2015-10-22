@@ -239,14 +239,18 @@ function getRandomColor() {
                     
                     if (iteratorId < 1000) {
                    
-                      var text2display = '';
+                      var text2display = 'Nessuna informazione!';
                       var iconPath = '';
+
+                      if (idata.InfoPattuglie.length){
+                        text2display = idata.InfoPattuglie[0].nome + "<br>"  +  idata.InfoPattuglie[0].equipaggio_completo;
+                      } 
+
                       // Se esiste un intervento in corso per la seguente pattuglia
                       if (idata.Intervento.length){
-                          text2display = idata.Intervento[0].tipo_segnalazione + "<br>" + idata.Intervento[0].descrizione_breve + "<br>" + idata.Intervento[0].evento_indirizzo1;
+                          text2display =  text2display +  "<br>" +  idata.Intervento[0].tipo_segnalazione + "<br>" + idata.Intervento[0].descrizione_breve + "<br>" + idata.Intervento[0].evento_indirizzo1;
                           iconPath = 'images/red-dot.png';
                       } else {
-                        text2display = '';
                         iconPath = 'images/blue-dot.png';
                       }
 

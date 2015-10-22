@@ -179,7 +179,7 @@ angular.module('myApp', ['ionic',
                     controller: "ListSegnalazioniController"
                 }
             },
-        accessLogged: true, 
+        accessLogged: false, 
         configAction: 'view'
     });   
 
@@ -191,7 +191,7 @@ angular.module('myApp', ['ionic',
                     controller: "ListBrogliaccioController"
                 }
             },
-        accessLogged: true, 
+        accessLogged: false, 
         configAction: 'view'
     });   
 
@@ -298,7 +298,7 @@ angular.module('myApp', ['ionic',
                     controller: "MapsController"
                 }
             },
-        accessLogged: true, 
+        accessLogged: false, 
         configAction: 'view'
   });
 

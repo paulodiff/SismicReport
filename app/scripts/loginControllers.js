@@ -252,7 +252,7 @@ angular.module('myApp.controllers')
     */
 
     $scope.credentials = {
-        username: '',
+        username: 'SISMIC',
         password: ''
      };
     

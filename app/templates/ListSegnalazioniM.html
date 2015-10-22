@@ -35,23 +35,93 @@
 
 
             <ion-list>
-                <ion-item ng-repeat="item in items" class="card item-text-wrap">
-                  
+                <ion-item ng-repeat="item in items" class="card">
+                   
+                <div class="item row item-text-wrap">
+                 <div class="col" style="text-align:center; padding: 0px; margin: 0px;"><b><p>Data</p></b>{{ item.data_creazione}}</div>
+                 <div class="col" style="text-align:center; padding: 0px; margin: 0px;"><b><p>Ora</p></b>{{ item.ora_creazione}}</div>
+                 <div class="col" style="text-align:center; padding: 0px; margin: 0px;"><b><p>Numero</p></b>{{item.protocollo }}</div>
+                </div>
+
+                <div class="item row item-text-wrap">
+                 <div class="col col-25"><b><p>Tipo</p></b></div>
+                 <div class="col col-75">{{item.tipo_segnalazione | utc8change}}</div>
+                </div>
+<!--
+                <div class="item row item-text-wrap">
+                 <div class="col"><b><p>Tipo</p></b>{{item.tipo_segnalazione | utc8change}}</div>
+                </div>
+-->
+                <div class="item row item-text-wrap">
+                <div class="col col-25"><b><p>Sogg.</p></b></div>
+                <div class="col col-75">{{item.richiedente_nominativo}}</div>
+                </div>
+
+                <div class="item row item-text-wrap">
+                <div class="col col-25"><b><p>Indir.</p></b></div>
+                <div class="col col-75">{{item.evento_indirizzo1}}</div>
+                </div>
+
+                <div class="item row item-text-wrap">
+                <div class="col col-25"><b><p>Ogg.</p></b></div>
+                <div class="col col-75">{{item.descrizione_breve | utc8change }}{{item.descrizione_dettagliata | utc8change }}</div>
+                </div>
+<!--
+                <div class="item row item-text-wrap">
+                <div class="col"><b><p>Oggetto</p></b>{{item.descrizione_breve | utc8change }}{{item.descrizione_dettagliata | utc8change }}</div>
+                </div>
+-->
+                <!--
                   <p><b>{{item.data_creazione}} - {{item.ora_creazione}} - {{item.protocollo}}</b></p>
                   <p><b>Tipo:</b>{{item.tipo_segnalazione | utc8change}}</p>
                   <p><b>Richiedente:</b>{{item.richiedente_nominativo}}</p>
                   <p><b>Indirizzo:</b>{{item.evento_indirizzo1}}</p>
                   <p>{{item.descrizione_breve | utc8change }}</p>
                   <p>{{item.descrizione_dettagliata | utc8change}}</p>
-                  <hr ng-show="item.q2.length">
-                  <p ng-repeat="intervento in item.q2">
-                      {{intervento.stato}}-[{{intervento.nome | utc8change }}]<br/> 
-                      {{intervento.ordini | utc8change}}{{intervento.esito | utc8change}}  
-                  </p>
-                  <hr ng-show="item.q3.length">
-                  <p ng-repeat="comunicazione in item.q3">
-                      {{comunicazione.comunicazione | utc8change}} 
-                  </p>
+                -->
+
+                  <!-- <hr ng-show="item.q2.length"> -->
+                  <div ng-repeat="intervento in item.q2">
+
+                <div class="item row">
+                <div class="col col-100"><b><p>Intervento:{{intervento.stato}}</p></b></div>
+                </div>
+
+                <div class="item row item-text-wrap">
+                 <div class="col" style="text-align:center; padding: 0px; margin: 0px;"><b><p>Pattuglia</p></b>{{ intervento.nome}}</div>
+                 <div class="col" style="text-align:center; padding: 0px; margin: 0px;"><b><p>Equipaggio</p></b>{{intervento.equipaggio_completo}}</div>
+                 <div class="col" style="text-align:center; padding: 0px; margin: 0px;"><b><p>Codice radio</p></b>{{intervento.codiceradio_veicolo}}</div>
+                </div>
+                <!--
+                <div class="item row">
+                <div class="col col-100"><p>{{intervento.note | utc8change }}</p></div>
+                </div>
+                -->
+
+                <div class="item row item-text-wrap">
+                <div class="col col-25"><b><p>Ordini</p></b></div>
+                <div class="col col-75">{{intervento.ordini | utc8change}}</div>
+                </div>
+                <div class="item row item-text-wrap">
+                <div class="col col-25"><b><p>Esito</p></b></div>
+                <div class="col col-75">{{intervento.esito | utc8change}}</div>
+                </div>
+<!--
+
+                      <b>{{intervento.stato}}</b><br/>
+                      Pattuglia({{intervento.id_cro_pattuglie}}): {{intervento.nome | utc8change }} - {{intervento.equipaggio_completo | utc8change }} - ({{intervento.codiceradio_veicolo}})<br/> 
+                      Note pattuglia: {{intervento.note | utc8change }} <br/> 
+                      Ordini: <b>{{intervento.ordini | utc8change}}</b><br/>
+                      Esito: <b>{{intervento.esito | utc8change}}</b>
+                  </div>
+-->
+                  <!-- <hr ng-show="item.q3.length"> -->
+
+                  <div ng-repeat="comunicazione in item.q3">
+                  <div class="item row item-text-wrap">
+                    <div class="col"><b><p>Comunicazione</p></b>{{comunicazione.comunicazione | utc8change}}</div>
+                  </div>
+                  </div>
 
 
                   <!--                                           
