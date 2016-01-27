@@ -29,18 +29,21 @@
                   <b>{{frmData.dateUpFilter | date:'dd/MM/yyyy' }}</b>
                 </label>
 
-
+                  <button class="button button-assertive button-block" 
+                          ng-click="refreshDati()">Premi per aggiornare i dati</button>
+              
               </div>
-
         
               </div>
+
+
 
 <!--
     
       <div class="row report-title-row">
           <div class="col"><b>{{frmData.descReport}}</b></div>
       </div>
--->
+--> 
 
 <!--
   <div ng-if="frmData.idReport == 1 && items.length">
@@ -65,7 +68,26 @@
 -->
 <div class="card">
 <ion-list class="card item-text-wrap">
-     
+        <div class="row">
+          <div class="col col-20"><b>N.</b></div>
+          <div class="col col-80"><b>Tipo</b></div>
+        </div>
+ 
+     <div  ng-show="items.length">
+        <div ng-repeat="item in items">
+          <!-- <div class="item item-body"> -->
+            <div class="row">
+              <div class="col col-20 report-item-row">{{item.conteggio}}</div>
+              <div class="col col-80 report-item-row">{{item.tipo_segnalazione}}</div>
+           </div>
+        <!-- </div> -->
+      </div>
+   </div>
+
+
+
+
+<!--     
      <div  ng-show="items.length">
             <div ng-repeat="item in items">
               <div ng-if="CreateGroupHeader(item.ANNOMESE)">
@@ -91,7 +113,7 @@
               </div>
             </div>
    </div>
-
+-->
       <ion-item ng-hide="items.length" class="item-text-wrap">
           <h2>Non ci sono elementi da visualizzare</h2>
           <h2>Modificare le impostazioni di ricerca</h2>

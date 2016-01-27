@@ -130,6 +130,7 @@ $scope.randomMarkers = [
     //limit: $scope.pageSize,
     numPosTracking: 10,
     soloPattuglie: true,
+    infoTraffico: true,
     timeInterval: 10, // minuti di validità
     qDateUp: $filter('date')( new Date(2015, 6, 20), "yyyyMMdd"),
     qDateDw: $filter('date')( new Date(2015, 6, 20), "yyyyMMdd"),
@@ -403,8 +404,21 @@ function getRandomColor() {
             $scope.polylines = fast_path;
             $log.debug($scope.randomMarkers);
           
-                $log.debug(' .. data loaded!');
+                $log.debug(' .. data loaded! : ' + iteratorId);
+
                 $ionicLoading.hide();  
+
+                if (iteratorId == 1 ) {
+
+                  var alertPopup = $ionicPopup.alert({
+                    title: 'Errore nel recupero dei dati',
+                    template: 'Non ci sono dati da visualizzare!'
+                  });
+                    alertPopup.then(function(res) {
+                    $log.debug('Nessun dato da visualizzare nella mappa');
+                  });
+                }
+
               
           // in caso di errore azzera la lista...      
           }, function () {

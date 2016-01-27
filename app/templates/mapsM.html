@@ -5,7 +5,7 @@
       <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
     </ion-nav-buttons>
       <ion-nav-buttons side="right" >
-        <button class="button button-icon ion-ios-refresh" ng-click="refreshMap()"></button>
+        <button class="button button-icon ion-refresh" ng-click="refreshMap()"></button>
         <button class="button button-icon ion-ios-book" ng-click="openSortModal()"></button>
       </ion-nav-buttons>
   </ion-nav-bar>
@@ -14,6 +14,10 @@
 
 <ion-content>
       <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true" options="'options'">
+
+      <!-- test -->
+      <ui-gmap-layer  type="TrafficLayer" show='filterCriteria.infoTraffico'></ui-gmap-layer>
+
 
       <!--
       	<ui-gmap-marker coords="staticMarker.coords" 

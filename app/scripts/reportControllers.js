@@ -106,7 +106,7 @@ angular.module('myApp.controllers')
   // inzializza la data di filtro   
   $log.debug('Init dateFilter');    
   $scope.frmData = {};     
-  $scope.frmData.dateDwFilter = new Date(2015,1,1);
+  $scope.frmData.dateDwFilter = new Date(2016,0,1);
   $scope.frmData.dateUpFilter = new Date();
   $scope.frmData.idReport = 1;
   $scope.frmData.descReport = "Tipi segnalazione per data";

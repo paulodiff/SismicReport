@@ -2,6 +2,10 @@
 
 Progetto per la realizzazione di reportistica Sismic
 
+grunt serve (per avviare il progetto) oppure nginx nginx per simulare l'ambiente 
+
+http://localhost/SismicReport/app/#/menu/home
+
 
 Fix grunt serve problem
 http://stackoverflow.com/questions/30853177/ionic-cli-exiting-after-grunt-serve
@@ -13,13 +17,11 @@ Update Ionic CLI
 > npm install -g ionic
 
 
-
 # Autenticazione 
 authService.js
 
 AuthService esegue le chiamate a login logout isAuthenticated isAuthorized con un Service
 Session un service che memorizza le info di sessione
-
 
 
 loginController.js

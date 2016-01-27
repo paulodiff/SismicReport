@@ -113,6 +113,12 @@ angular.module('myApp.controllers')
             $log.debug(next);
             $scope.currentUser = Session.nome_breve_utenti;
             Restangular.setDefaultHeaders({'rr-access-token': Session.token});
+
+            //storePassword
+            // $log.debug('set storage login to:',Session.token);
+            // $localStorage.Session = Session;
+            
+
             //$state.go('menu.list');
             $state.go(ENV.routeAfterLogon);
         });
@@ -126,6 +132,10 @@ angular.module('myApp.controllers')
             $scope.currentUser = '';
             Session.token = '123';
             Restangular.setDefaultHeaders({token: ''});
+
+            //$log.debug('Destroy local session....');
+            //delete $localStorage.Session;
+
             $state.go('menu.home');
         });        
                 
@@ -134,37 +144,45 @@ angular.module('myApp.controllers')
             $log.debug('AppCtrl: AUTH_EVENTS.loginFailed ... ');
             $log.debug(event);
             $log.debug(next);
-            
-            var alertPopup = $ionicPopup.alert({
-                title: 'Login errato',
-                template: 'Immettere nome utente e password corrette'
-            });
-           alertPopup.then(function(res) {
-                $log.debug('AppCtrl : Login errato OK');
-                $state.go('menu.home');
-           });
+
+
+
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Login errato',
+                    template: 'Immettere nome utente e password corrette'
+                });
+               alertPopup.then(function(res) {
+                    $log.debug('AppCtrl : Login errato OK');
+                    $state.go('menu.home');
+               });
+
+      
+
         }); 
 
          $rootScope.$on(ENV.AUTH_EVENTS.notAuthenticated, function (event, next) {
-            $log.debug('AUTH_EVENTS.notAuthenticated ... ');
+            $log.debug('AppCtrl : AUTH_EVENTS.notAuthenticated ... ');
             $log.debug(event);
             $log.debug(next);
-            $scope.currentUser = Session.nome_breve_utenti;
+            //$scope.currentUser = Session.nome_breve_utenti;
             
-             var alertPopup = $ionicPopup.alert({
-                title: 'Utente non autenticato o sessione di lavoro scaduta',
-                template: 'Immettere nome utente e password'
+
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Utente non autenticato o sessione di lavoro scaduta',
+                    template: 'Immettere nome utente e password'
                 });
-            alertPopup.then(function(res) {
-             $log.debug('AppCtrl: alertPopup : OK');
-                $state.go('menu.home');
-           });
+                alertPopup.then(function(res) {
+                    $log.debug('AppCtrl: alertPopup : OK');
+                    $state.go('menu.home');
+                });
+            
+
 
         }); 
     
 
         $rootScope.$on(ENV.AUTH_EVENTS.sessionTimeout, function (event, next) {
-            $log.debug('AUTH_EVENTS.sessionTimeout ... ');
+            $log.debug('AppCtrl: AUTH_EVENTS.sessionTimeout ... ');
             $log.debug(event);
             $log.debug(next);
             $scope.currentUser = Session.nome_breve_utenti;
@@ -181,7 +199,7 @@ angular.module('myApp.controllers')
         }); 
 
         $rootScope.$on(ENV.AUTH_EVENTS.serverError, function (event, next) {
-            $log.debug('AUTH_EVENTS.serverError ... ');
+            $log.debug('AppCtrl : AUTH_EVENTS.serverError ... ');
             $log.debug(event);
             $log.debug(next);
             $scope.currentUser = Session.nome_breve_utenti;
@@ -198,16 +216,27 @@ angular.module('myApp.controllers')
         }); 
 
         $rootScope.$on('$stateChangeStart', function (event, next) {
-            $log.debug('$stateChangeStart: ' + next.accessLogged);
+
+            $log.debug('AppCtrl on $stateChangeStart: ' + next.accessLogged);
+            $log.debug(next);
+            $log.debug(event);
                         
             if(next.accessLogged){
-                $log.debug('$stateChangeStart: check if isAuthenticated : ' + AuthService.isAuthenticated());
+                $log.debug('AppCtrl on $stateChangeStart: check if isAuthenticated : ' + AuthService.isAuthenticated());
                 if(!AuthService.isAuthenticated()){
+
+
+    
+
                     event.preventDefault();    
+                    $log.debug('AppCtrl on $stateChangeStart: notAuthenticated broadcast event');
                     $rootScope.$broadcast(ENV.AUTH_EVENTS.notAuthenticated);
+
+                        
+    
                 }
             } else {
-                $log.debug('$stateChangeStart: PATH free');
+                $log.debug('AppCtrl on $stateChangeStart: PATH free');
             }
             
             /*
